@@ -23,7 +23,7 @@ public class FileIO {
     }
 
     public static void saveUserData(User user) {
-        try (PrintWriter pWriter = new PrintWriter(new FileWriter("UserData.txt"))){
+        try (PrintWriter pWriter = new PrintWriter(new FileWriter("data/UserData.txt",true))){
 
             if (user != null) {
                 pWriter.println(user.toString());

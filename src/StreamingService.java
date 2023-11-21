@@ -10,7 +10,8 @@ public class StreamingService {
 
 
     public void setup(){
-        ui.displayMessage("Welcome. Please create a username and password");
+        ui.displayMessage("Welcome and Please Chill");
+        ui.displayMessage("You have chosen to create an account");
         CreateAccount.createUser();
     }
 

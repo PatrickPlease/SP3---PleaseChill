@@ -6,11 +6,15 @@ public class CreateAccount {
     public static void createUser() {
         Scanner scanner = new Scanner(System.in);
 
+        ui.displayMessage("Enter a Username:");
+
         String username = scanner.nextLine();
         while (!DataValidator.isUsernameValid(username)) {
             ui.displayMessage("Username invalid, please try again");
             username = scanner.nextLine();
         }
+
+        ui.displayMessage("Enter a Password:");
 
         String password = scanner.nextLine();
         while (!DataValidator.isPasswordValid(password)) {
@@ -23,4 +27,5 @@ public class CreateAccount {
         FileIO.saveUserData(newUser);
         ui.displayMessage("New user added. Welcome");
     }
+
 }
