@@ -10,10 +10,13 @@ public class StreamingService {
 
 
     public void setup(){
+        ArrayList<String> data = io.readUserData("data/UserData.txt");
         ui.displayMessage("");
+
     }
 
-    public login(){}
+    public login(){
+    }
 
     public Media searchByName(){
         return null;
@@ -22,6 +25,7 @@ public class StreamingService {
     public Media searchByCategory(){
         return null;
     }
+
     public Media searchByYear(){}
 
     public void logOut(){}
