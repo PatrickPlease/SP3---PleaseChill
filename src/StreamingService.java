@@ -9,13 +9,24 @@ public class StreamingService {
     static ArrayList<User> users;
 
 
+
     public void setup(){
+        ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
+
         ArrayList<String> data = io.readUserData("data/UserData.txt");
-        ui.displayMessage("");
+        if (ui.getInput("Type L to Login, Type C to Create account").equalsIgnoreCase("L")){
+            login();
+        } else {
+
+        }
+
+
+
 
     }
 
-    public login(){
+    public void login(){
+
     }
 
     public Media searchByName(){
