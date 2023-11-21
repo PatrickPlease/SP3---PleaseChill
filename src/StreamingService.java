@@ -13,7 +13,7 @@ public class StreamingService {
         ui.displayMessage("");
     }
 
-    public login(){}
+    public void login(){}
 
     public Media searchByName(){
         return null;
@@ -22,7 +22,9 @@ public class StreamingService {
     public Media searchByCategory(){
         return null;
     }
-    public Media searchByYear(){}
+    public Media searchByYear(){
+        return null;
+    }
 
     public void logOut(){}
 

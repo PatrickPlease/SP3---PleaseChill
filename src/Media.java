@@ -1,25 +1,40 @@
 public abstract class Media {
-        private String title;
-        private int releaseYear;
-        private float rating;
-        private String genre;
+    private String title;
+    private int releaseYear;
+    private float rating;
+    private String genre;
+    private boolean mediaType;
 
 
-        String getTitle(){
+    public Media(String title, int releaseYear, float rating, String genre, boolean mediaType) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.rating = rating;
+        this.genre = genre;
+        this.mediaType = mediaType;
+    }
 
-        }
-        int getReleaseYear(){
 
-        }
-        float getRating(){
-            
-        }
-        String getGenre(){
+    public String getTitle() {
+        return title;
+    }
 
-        }
-        int getTimeWatched(){
+    public int getReleaseYear() {
+        return releaseYear;
+    }
 
-        }
+    public float
+    getRating() {
+        return rating;
+    }
 
-        void Media(String title, int releaseYear, float rating, String genre, boolean MediaType);
+    public String getGenre() {
+        return genre;
+    }
+
+    public boolean isMediaType() {
+        return mediaType;
+    }
+
+    public abstract int getTimeWatched();
 }

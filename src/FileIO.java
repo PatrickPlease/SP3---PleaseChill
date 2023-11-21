@@ -3,9 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileIO {
+
+    public static void saveUserData(User newUser) {
+    }
 
     public ArrayList<String> readUserData(String path) {
         ArrayList<String> data = new ArrayList<>();
@@ -25,18 +29,19 @@ public class FileIO {
         return data;
     }
 
-    public static void saveUserData(ArrayList<User> Users) {
-        try {
-            FileWriter writer = new FileWriter("data/UserData.txt");
-            writer.write("Username, Password" + "\n");
-            for (User c : Users) {
-                String textTosave = c.getUsername() + "," + c.getPassword();
-                writer.write(textTosave + "\n");
+    public class UserDataSaver {
+        public static void saveUserData(List<User> users) {
+            try {
+                FileWriter writer = new FileWriter("data/UserData.txt");
+                writer.write("Username, Password" + "\n");
+                for (User user : users) {
+                    String textToSave = user.getUsername() + "," + user.getPassword();
+                    writer.write(textToSave + "\n");
+                }
+                writer.close();
+                System.out.println("User data saved successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Something is wrong with the Datafile");
         }
-
-    }
-}
+    }}
