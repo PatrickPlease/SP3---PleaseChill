@@ -3,16 +3,15 @@ public abstract class Media {
         private int releaseYear;
         private float rating;
         private String genre;
+}
 
-
-        String getTitle(){
+     /*   String getTitle(){
 
         }
         int getReleaseYear(){
 
         }
         float getRating(){
-            
         }
         String getGenre(){
 
@@ -21,5 +20,6 @@ public abstract class Media {
 
         }
 
-        void Media(String title, int releaseYear, float rating, String genre, boolean MediaType);
+        void Media(String title, int releaseYear, float rating, String genre, boolean MediaType){}
 }
+*/
