@@ -25,7 +25,7 @@ public class CreateAccount {
         User newUser = new User(username, password);
         User.addUser(newUser);
         FileIO.saveUserData(newUser);
-        ui.displayMessage("New user added. Welcome");
+        ui.displayMessage("Account created, Welcome");
     }
 
 }

@@ -27,7 +27,6 @@ public class FileIO {
 
             if (user != null) {
                 pWriter.println(user.toString());
-                System.out.println("User data saved");
             }
         } catch (IOException e) {
             System.out.println("Something is wrong with the Datafile");
