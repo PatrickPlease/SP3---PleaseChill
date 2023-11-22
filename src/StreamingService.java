@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class StreamingService {
     CreateAccount newAccount;
@@ -12,6 +15,7 @@ public class StreamingService {
 
 
     public void setup() {
+        users = new ArrayList<>();
         ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
 
         int choice = Integer.parseInt(ui.getInput("Press 1 to Login, Press 2 to Create an account"));
@@ -90,7 +94,7 @@ public class StreamingService {
     }
 
     public void login() {
-        ArrayList<String> data = io.readUserData("data/UserData.txt");
+        io.readUserData("data/UserData.txt", users);
 
         String username = ui.getInput("Enter your username: ");
         String password = ui.getInput("Enter your password: ");
@@ -137,3 +141,4 @@ public class StreamingService {
 // TextUI skal laves om til metode (getInput og displaymessage)
 // Alt fra start() skal sættes in Streaming service
 // Struktur ud fra klasse diagram
+

@@ -27,21 +27,21 @@ public class MediaApplication {
 
 
         // Display Movies
-        ui.displayMessage("\nMovies:");
+       /* ui.displayMessage("\nMovies:");
         for (Movies movie : movies) {
             ui.displayMessage(movie.getTitle());
-        }
+        }*/
 
-        // Display Thriller Movies
+        /* Display Thriller Movies
         ui.displayMessage("\nThriller Movies:");
         for (Movies movie : movies) {
             if (movie.getGenre().equalsIgnoreCase("Thriller")) {
                 ui.displayMessage(movie.getTitle());
             }
-        }
-    }
+        }*/
 
-    private static List<TvShow> readTvShowsFromFile() {
+
+    public static List<TvShow> readTvShowsFromFile() {
         List<TvShow> tvShows = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader("Data/100bedsteserie.txt"))) {
@@ -89,7 +89,7 @@ public class MediaApplication {
         return tvShows;
     }
 
-    private static List<Movies> readMoviesFromFile() {
+    public static List<Movies> readMoviesFromFile() {
         List<Movies> movies = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader("Data/100bedstefilm.txt"))) {

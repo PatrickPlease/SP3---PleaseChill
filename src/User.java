@@ -5,6 +5,7 @@ public class User {
     private String password;
     static ArrayList<User> users = new ArrayList<>();
 
+
     public User(String username, String password) {
         setUsername(username);
         setPassword(password);
