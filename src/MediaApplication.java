@@ -7,14 +7,24 @@ import java.util.List;
 public class MediaApplication {
     private static final TextUI ui = new TextUI();
 
-    public static void main(String[] args) {
-        List<TvShow> tvShows = readTvShowsFromFile();
-        List<Movies> movies = readMoviesFromFile();
+    public static void tvShowPrinter() {
+        List<TvShow> tvShows = new ArrayList<>();
 
         ui.displayMessage("TV Shows:");
         for (TvShow tvShow : tvShows) {
             ui.displayMessage(tvShow.getTitle() + " - releaseyears: " + tvShow.getStartYear() + "-" + tvShow.getEndYear());
         }
+    }
+
+    public static void moviesPrinter() {
+        List<Movies> movies = readMoviesFromFile();
+
+        ui.displayMessage("Movies:");
+        for (Movies movie : movies) {
+            ui.displayMessage(movie.getTitle());
+        }
+    }
+
 
         // Display Movies
         ui.displayMessage("\nMovies:");

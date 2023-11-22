@@ -4,10 +4,11 @@ public class StreamingService {
     CreateAccount newAccount;
     Category newCategory;
     Watchlist list;
-    FileIO io;
+    private FileIO io = new FileIO();
     private TextUI ui = new TextUI();
-    static ArrayList<User> users;
-
+    private List<TvShow> tvShows;
+    private List<Movies> movies;
+    static ArrayList<User> users = new ArrayList<>();
 
 
     public void setup() {
@@ -27,6 +28,65 @@ public class StreamingService {
                 setup();
                 break;
         }
+
+        ui.displayMessage("============================================= \n");
+        int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
+        switch (mainpage) {
+            case 1:
+                searchByName();
+                break;
+            case 2:
+                ui.displayMessage("============================================= \n");
+                int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
+                switch(moviepage) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        ui.displayMessage("Invalid choice. Please try again.");
+                        break;
+
+                }
+
+                break;
+            case 3:
+                int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
+                switch(seriespage) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        ui.displayMessage("Invalid choice. Please try again.");
+                        break;
+                }
+                break;
+            case 4:
+                ui.displayMessage("Logout");
+                setup();
+                break;
+            default:
+                ui.displayMessage("Invalid choice. Please try again.");
+                break;
+        }
+
     }
 
     public void login() {
@@ -39,10 +99,12 @@ public class StreamingService {
         if (user != null) {
             ui.displayMessage("Login successful. Welcome back, " + user.getUsername() + "!");
 
+
         } else {
             ui.displayMessage("Invalid username or password. Please try again.");
             login();
         }
+
     }
 
     private User findUser(String username, String password) {

@@ -4,22 +4,21 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    public ArrayList<String> readUserData(String path) {
-        ArrayList<String> data = new ArrayList<>();
-        File file = new File(path);
-
-        try {
-            Scanner scan = new Scanner(file);
-            scan.nextLine();
+    public void readUserData(String path, ArrayList<User> users){
+        try (Scanner scan = new Scanner(new File("data/UserData.txt"))) {
             while (scan.hasNextLine()) {
-                String s = scan.nextLine();
-                data.add(s);
+                String line = scan.nextLine();
+                String[] userData = line.split(",");
+
+                if (userData.length == 2) {
+                    String username = userData[0];
+                    String password = userData[1];
+                    users.add(new User(username, password));
+                }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("file not found");
+            System.out.println("File not found");
         }
-
-        return data;
     }
 
     public static void saveUserData(User user) {
