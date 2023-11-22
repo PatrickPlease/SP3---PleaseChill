@@ -21,25 +21,12 @@ public class MediaApplication {
         List<Movies> movies = readMoviesFromFile();
 
         ui.displayMessage("Movies:");
+        int mIndex = 1;
         for (Movies movie : movies) {
-            ui.displayMessage(movie.getTitle());
+            ui.displayMessage(mIndex + ". " + movie.getTitle() + " - release year: " + movie.getReleaseYear());
+            mIndex++;
         }
     }
-
-
-        // Display Movies
-       /* ui.displayMessage("\nMovies:");
-        for (Movies movie : movies) {
-            ui.displayMessage(movie.getTitle());
-        }*/
-
-        /* Display Thriller Movies
-        ui.displayMessage("\nThriller Movies:");
-        for (Movies movie : movies) {
-            if (movie.getGenre().equalsIgnoreCase("Thriller")) {
-                ui.displayMessage(movie.getTitle());
-            }
-        }*/
 
 
     public static List<TvShow> readTvShowsFromFile() {
