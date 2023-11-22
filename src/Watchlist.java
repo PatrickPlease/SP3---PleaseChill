@@ -14,3 +14,6 @@ public class Watchlist {
         return ui.displayMessage("You have remove this movie from your list");
     }*/
 }
+
+
+//burde allerede være lavet
