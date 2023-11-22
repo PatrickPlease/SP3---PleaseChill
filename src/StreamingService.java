@@ -25,6 +25,7 @@ public class StreamingService {
                 login();
                 break;
             case 2:
+                ui.displayMessage("You have chosen to create an account");
                 CreateAccount.createUser();
                 break;
             default:
@@ -99,7 +100,7 @@ public class StreamingService {
         String username = ui.getInput("Enter your username: ");
         String password = ui.getInput("Enter your password: ");
 
-        User user = findUser(username, password);
+        User user = findUser(username, password, users);
         if (user != null) {
             ui.displayMessage("Login successful. Welcome back, " + user.getUsername() + "!");
 
@@ -111,7 +112,7 @@ public class StreamingService {
 
     }
 
-    private User findUser(String username, String password) {
+    private User findUser(String username, String password, ArrayList<User> users) {
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return user;
@@ -128,8 +129,14 @@ public class StreamingService {
         return null;
     }
 
-    public Media searchByYear(){}
+    public ArrayList<Media> searchByYear() {
+        return null;
+    }
 
+    public void loadMediaData() {
+      /*  tvShows = readTvShowsFromFile();
+        movies = readMoviesFromFile();*/
+    }
     public void logOut(){}
 
     void runStreamingService(){}

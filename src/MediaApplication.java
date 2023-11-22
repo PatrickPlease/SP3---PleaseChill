@@ -44,14 +44,13 @@ public class MediaApplication {
     public static List<TvShow> readTvShowsFromFile() {
         List<TvShow> tvShows = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("Data/100bedsteserie.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/100bedsteserie.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
                 String title = parts[0].trim();
                 String yearRange = parts[1].trim(); // assuming year range is the 2nd element
                 String genre = parts[2].trim();
-
                 float rating = Float.parseFloat(parts[3].replace(",", ".").trim());
 
                 // Handling episodes
@@ -63,12 +62,8 @@ public class MediaApplication {
                 int startYear = Integer.parseInt(years[0].trim());
 
                 // Check if there is an end year
-                int endYear;
-                if (years.length > 1) {
-                    endYear = Integer.parseInt(years[1].trim());
-                } else {
-                    endYear = startYear;
-                }
+                int endYear = (years.length>1) ? Integer.parseInt(years[1].trim()) :startYear;
+
 
                 TvShow tvShow = new TvShow(title, startYear, endYear, rating, genre, totalSeasons);
 
@@ -92,8 +87,9 @@ public class MediaApplication {
     public static List<Movies> readMoviesFromFile() {
         List<Movies> movies = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("Data/100bedstefilm.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/100bedstefilm.txt"))) {
             String line;
+
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
                 String title = parts[0].trim();
