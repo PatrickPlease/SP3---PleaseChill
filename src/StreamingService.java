@@ -45,6 +45,7 @@ public class StreamingService {
                 int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
                 switch(moviepage) {
                     case 1:
+                        MediaApplication.moviesPrinter();
                         break;
                     case 2:
                         break;
@@ -67,6 +68,8 @@ public class StreamingService {
                 int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
                 switch(seriespage) {
                     case 1:
+                        MediaApplication.tvShowPrinter();
+
                         break;
                     case 2:
                         break;
@@ -120,6 +123,8 @@ public class StreamingService {
         }
         return null;
     }
+
+
 
     public Media searchByName(){
         return null;

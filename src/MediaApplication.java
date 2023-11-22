@@ -12,7 +12,8 @@ public class MediaApplication {
 
         ui.displayMessage("TV Shows:");
         for (TvShow tvShow : tvShows) {
-            ui.displayMessage(tvShow.getTitle() + " - releaseyears: " + tvShow.getStartYear() + "-" + tvShow.getEndYear());
+            ui.displayMessage(tIndex +"."+ tvShow.getTitle() + " - release year: " + tvShow.getStartYear() + "-" + tvShow.getEndYear());
+            tIndex++;
         }
     }
 
