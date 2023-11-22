@@ -58,7 +58,7 @@ public class StreamingService {
         return null;
     }
 
-    public Media searchByCategory(){
+    public ArrayList<Media> searchByCategory(){
         return null;
     }
 
