@@ -8,9 +8,11 @@ public class MediaApplication {
     private static final TextUI ui = new TextUI();
 
     public static void tvShowPrinter() {
-        List<TvShow> tvShows = new ArrayList<>();
+        List<TvShow> tvShows = readTvShowsFromFile();
+
 
         ui.displayMessage("TV Shows:");
+        int tIndex = 1;
         for (TvShow tvShow : tvShows) {
             ui.displayMessage(tIndex +"."+ tvShow.getTitle() + " - release year: " + tvShow.getStartYear() + "-" + tvShow.getEndYear());
             tIndex++;
