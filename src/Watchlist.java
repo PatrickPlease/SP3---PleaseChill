@@ -1,6 +1,6 @@
 public class Watchlist {
     private static TextUI ui = new TextUI();
-    public void addMedia() {
+   /* public void addMedia() {
         return ui.displayMessage("You have add a movie to your list");
     }
 
@@ -12,5 +12,5 @@ public class Watchlist {
 
     public void removeMedia(){
         return ui.displayMessage("You have remove this movie from your list");
-    }
+    }*/
 }

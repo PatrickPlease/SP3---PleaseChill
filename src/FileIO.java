@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,18 +22,14 @@ public class FileIO {
         return data;
     }
 
-    public static void saveUserData(ArrayList<User> Users) {
-        try {
-            FileWriter writer = new FileWriter("data/UserData.txt");
-            writer.write("Username, Password" + "\n");
-            for (User c : Users) {
-                String textTosave = c.getUsername() + "," + c.getPassword();
-                writer.write(textTosave + "\n");
+    public static void saveUserData(User user) {
+        try (PrintWriter pWriter = new PrintWriter(new FileWriter("data/UserData.txt",true))){
+
+            if (user != null) {
+                pWriter.println(user.toString());
             }
-            writer.close();
         } catch (IOException e) {
             System.out.println("Something is wrong with the Datafile");
         }
-
     }
 }
