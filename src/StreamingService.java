@@ -10,10 +10,12 @@ public class StreamingService {
 
 
     public void setup(){
-        ui.displayMessage("");
+        ui.displayMessage("Welcome and Please Chill");
+        ui.displayMessage("You have chosen to create an account");
+        CreateAccount.createUser();
     }
 
-    public login(){}
+    public void login(){}
 
     public Media searchByName(){
         return null;
@@ -22,7 +24,7 @@ public class StreamingService {
     public Media searchByCategory(){
         return null;
     }
-    public Media searchByYear(){}
+    public Media searchByYear(){return null;}
 
     public void logOut(){}
 

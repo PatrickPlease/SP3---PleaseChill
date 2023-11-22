@@ -2,24 +2,30 @@ import java.util.Scanner;
 
 public class CreateAccount {
     private static TextUI ui = new TextUI();
+
     public static void createUser() {
         Scanner scanner = new Scanner(System.in);
-        ui.displayMessage("Welcome. Please enter a username");
+
+        ui.displayMessage("Enter a Username:");
 
         String username = scanner.nextLine();
-        ui.displayMessage("Please enter a password");
-        String password = scanner.nextLine();
-
-        try {
-            User newUser = new User(username, password);
-            User.addUser(newUser);
-            FileIO.saveUserData(newUser);
-            ui.displayMessage( "New user added. Welcome");
-
-        } catch (IllegalArgumentException e) {
-            ui.displayMessage("Your input was not valid. Please try again");
-
+        while (!DataValidator.isUsernameValid(username)) {
+            ui.displayMessage("Username invalid, please try again");
+            username = scanner.nextLine();
         }
-        public boolean createUser(String username, String password)
-        public boolean addUser(new user(username,password))}
+
+        ui.displayMessage("Enter a Password:");
+
+        String password = scanner.nextLine();
+        while (!DataValidator.isPasswordValid(password)) {
+            ui.displayMessage("Password invalid, please try again");
+            password = scanner.nextLine();
+        }
+
+        User newUser = new User(username, password);
+        User.addUser(newUser);
+        FileIO.saveUserData(newUser);
+        ui.displayMessage("Account created, Welcome");
+    }
+
 }
