@@ -20,6 +20,10 @@ public class CreateAccount {
             ui.displayMessage("Your input was not valid. Please try again");
 
         }
-        public boolean createUser(String username, String password)
-        public boolean addUser(new user(username,password))}
+        public boolean createUser(String username, String password){
+
+        }
+        public boolean addUser(new user(username,password)){
+
+        }
 }

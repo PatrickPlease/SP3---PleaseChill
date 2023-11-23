@@ -1,3 +1,3 @@
-public abstract class Movies extends Media{
+public class Movies extends Media{
 
 }
