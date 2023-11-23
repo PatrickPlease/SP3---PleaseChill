@@ -35,7 +35,7 @@ public class StreamingService {
         }
 
         ui.displayMessage("============================================= \n");
-        Mainpage();
+        mainpage();
     }
 
     public void login() {
@@ -86,6 +86,7 @@ public class StreamingService {
                         break;
                     default:
                         ui.displayMessage("Invalid choice. Please try again.");
+                        mainpage();
                         break;
                 }
                 break;
@@ -102,11 +103,12 @@ public class StreamingService {
                 break;
             default:
                 ui.displayMessage("Invalid choice. Please try again.");
+                mainpage();
                 break;
         }
     }
 
-    public void Moviepage() {
+    public void moviepage() {
         ui.displayMessage("============================================= \n");
         int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
         switch (moviepage) {
@@ -135,7 +137,7 @@ public class StreamingService {
                 break;
             case 6:
                 ui.displayMessage("============================================= \n");
-                Mainpage();
+                mainpage();
                 break;
             default:
                 ui.displayMessage("Invalid choice. Please try again.");
