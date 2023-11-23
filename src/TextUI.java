@@ -4,21 +4,65 @@ import java.util.Scanner;
 public class TextUI {
     private Scanner scan = new Scanner(System.in);
 
+    private MediaWindow mediaWindow;
+
+    public TextUI() {
+        mediaWindow = new MediaWindow();
+    }
+
     public String getInput(String msg) {
 
         System.out.println(msg);
         return scan.nextLine();
     }
 
-    public void displayMessage(String msg){
+    public void displayMessage(String msg) {
         System.out.println(msg);
     }
+
+
+    public void runMediaPlayer() {
+        boolean exit = false;
+        while (!exit) {
+            displayMenu();
+            int choice = Integer.parseInt(getInput("Enter your choice: "));
+
+            switch (choice) {
+                case 1:
+                    mediaWindow.playMedia();
+                    break;
+                case 2:
+                    mediaWindow.pauseMedia();
+                    break;
+                case 3:
+                    mediaWindow.rewindMedia();
+                    break;
+                case 4:
+                    mediaWindow.forwardMedia();
+                    break;
+                case 5:
+                    mediaWindow.episodeOverview();
+                    break;
+                case 6:
+                    mediaWindow.exitMedia();
+                    exit = true;
+                    break;
+                default:
+                    displayMessage("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private void displayMenu() {
+        System.out.println("1. Play Media");
+        System.out.println("2. Pause Media");
+        System.out.println("3. Rewind Media");
+        System.out.println("4. Forward Media");
+        System.out.println("5. Episode Overview");
+        System.out.println("6. Exit");
+    }
+
 }
-
-
-
-
-
 
 
 
