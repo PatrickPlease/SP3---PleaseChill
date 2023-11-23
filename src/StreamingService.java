@@ -14,7 +14,6 @@ public class StreamingService {
     static ArrayList<User> users = new ArrayList<>();
 
 
-
     public void setup() {
         users = new ArrayList<>();
         ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
@@ -63,7 +62,7 @@ public class StreamingService {
         return null;
     }
 
-    public void Mainpage(){
+    public void Mainpage() {
         int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
         switch (mainpage) {
             case 1:
@@ -107,10 +106,10 @@ public class StreamingService {
         }
     }
 
-    public void Moviepage(){
+    public void Moviepage() {
         ui.displayMessage("============================================= \n");
         int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
-        switch(moviepage) {
+        switch (moviepage) {
             case 1:
                 MediaApplication.moviesPrinter();
                 ui.displayMessage("============================================= \n" +
@@ -144,10 +143,10 @@ public class StreamingService {
         }
     }
 
-    public void Seriespage(){
+    public void Seriespage() {
         ui.displayMessage("============================================= \n");
         int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
-        switch(seriespage) {
+        switch (seriespage) {
             case 1:
                 ui.displayMessage("============================================= \n");
                 MediaApplication.tvShowPrinter();
@@ -175,11 +174,11 @@ public class StreamingService {
     }
 
 
-    public Media searchByName(){
+    public Media searchByName() {
         return null;
     }
 
-    public ArrayList<Media> searchByCategory(){
+    public ArrayList<Media> searchByCategory() {
         return null;
     }
 
@@ -192,17 +191,31 @@ public class StreamingService {
         movies = MediaApplication.readMoviesFromFile();
     }
 
-    void runStreamingService(){}
+    void runStreamingService() {
+    }
 
     public void addToWatchlist(User user) {
         String newWatchlistItem = ui.getInput("Enter the title of the movie to add to your watchlist:");
         FileIO.addToWatchlist(user, newWatchlistItem);
         ui.displayMessage("Movie are now added to your watchlist!");
     }
+    private void printMoviesWithNumbers(List<Movies> movies) {
+        int movieNumber = 1;
+        for (Movies movie : movies) {
+            ui.displayMessage(movieNumber + ". " + movie.getTitle() + " - y: " + movie.getReleaseYear());
+            movieNumber++;
+        }
+    }
 
+    private Movies findMovieByNumber(int selectedMovieNumber, List<Movies> movies) {
+        if (selectedMovieNumber > 0 && selectedMovieNumber <= movies.size()) {
+            return movies.get(selectedMovieNumber - 1);
+        } else {
+            return null;
+        }
+
+    }
 }
-
-
 // TextUI skal laves om til metode (getInput og displaymessage)
 // Alt fra start() skal sættes in Streaming service
 // Struktur ud fra klasse diagram
