@@ -14,6 +14,7 @@ public class StreamingService {
     static ArrayList<User> users = new ArrayList<>();
 
 
+
     public void setup() {
         users = new ArrayList<>();
         ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
@@ -35,84 +36,22 @@ public class StreamingService {
         }
 
         ui.displayMessage("============================================= \n");
-        int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
-        switch (mainpage) {
-            case 1:
-                searchByName();
-                break;
-            case 2:
-                ui.displayMessage("============================================= \n");
-                int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
-                switch(moviepage) {
-                    case 1:
-                        MediaApplication.moviesPrinter();
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    default:
-                        ui.displayMessage("Invalid choice. Please try again.");
-                        break;
-
-                }
-
-                break;
-            case 3:
-                int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
-                switch(seriespage) {
-                    case 1:
-                        MediaApplication.tvShowPrinter();
-
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    default:
-                        ui.displayMessage("Invalid choice. Please try again.");
-                        break;
-                }
-                break;
-            case 4:
-                ui.displayMessage("Logout");
-                setup();
-                break;
-            default:
-                ui.displayMessage("Invalid choice. Please try again.");
-                break;
-        }
-
+        Mainpage();
     }
 
     public void login() {
-        io.readUserData("data/UserData.txt", users);
-
         String username = ui.getInput("Enter your username: ");
         String password = ui.getInput("Enter your password: ");
 
-        User user = findUser(username, password, users);
-        if (user != null) {
-            ui.displayMessage("Login successful. Welcome back, " + user.getUsername() + "!");
+        User user = io.readUserData(username);
 
+        if (user != null && user.getPassword().equals(password)) {
+            ui.displayMessage("Login successful. Welcome back, " + user.getUsername() + "!");
 
         } else {
             ui.displayMessage("Invalid username or password. Please try again.");
             login();
         }
-
     }
 
     private User findUser(String username, String password, ArrayList<User> users) {
@@ -124,6 +63,88 @@ public class StreamingService {
         return null;
     }
 
+    public void Mainpage(){
+        int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
+        switch (mainpage) {
+            case 1:
+                searchByName();
+                break;
+            case 2:
+                Moviepage();
+                break;
+            case 3:
+                Seriespage();
+                break;
+            case 4:
+                ui.displayMessage("You are now leaving PleaseChill..");
+                ui.displayMessage("============================================= \n");
+                setup();
+                break;
+            default:
+                ui.displayMessage("Invalid choice. Please try again.");
+                break;
+        }
+    }
+
+    public void Moviepage(){
+        ui.displayMessage("============================================= \n");
+        int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
+        switch(moviepage) {
+            case 1:
+                MediaApplication.moviesPrinter();
+                break;
+            case 2:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 3:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 4:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 5:
+                ui.displayMessage("============================================= \n");
+                //addToWatchlist();
+                break;
+            case 6:
+                ui.displayMessage("============================================= \n");
+                Mainpage();
+                break;
+            default:
+                ui.displayMessage("Invalid choice. Please try again.");
+                break;
+        }
+    }
+
+    public void Seriespage(){
+        ui.displayMessage("============================================= \n");
+        int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
+        switch(seriespage) {
+            case 1:
+                ui.displayMessage("============================================= \n");
+                MediaApplication.tvShowPrinter();
+                break;
+            case 2:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 3:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 4:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 5:
+                ui.displayMessage("============================================= \n");
+                break;
+            case 6:
+                ui.displayMessage("============================================= \n");
+                Mainpage();
+                break;
+            default:
+                ui.displayMessage("Invalid choice. Please try again.");
+                break;
+        }
+    }
 
 
     public Media searchByName(){
@@ -142,11 +163,15 @@ public class StreamingService {
       /*  tvShows = readTvShowsFromFile();
         movies = readMoviesFromFile();*/
     }
-    public void logOut(){}
 
     void runStreamingService(){}
 
-    public void moveToWatchList(){}
+    public void addToWatchlist(User user) {
+        String newWatchlistItem = ui.getInput("Enter the title of the movie to add to your watchlist:");
+        FileIO.addToWatchlist(user, newWatchlistItem);
+        ui.displayMessage("Movie are now added to your watchlist!");
+    }
+
 }
 
 
