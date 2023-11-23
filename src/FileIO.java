@@ -4,31 +4,36 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    public void readUserData(String path, ArrayList<User> users){
-        try (Scanner scan = new Scanner(new File("data/UserData.txt"))) {
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                String[] userData = line.split(",");
-
-                if (userData.length == 2) {
-                    String username = userData[0];
-                    String password = userData[1];
-                    users.add(new User(username, password));
-                }
+    public static User readUserData(String username) {
+        try (Scanner scanner = new Scanner(new File("data/UserData/" + username + "_UserData.txt"))) {
+            if (scanner.hasNextLine()) {
+                String password = scanner.nextLine();
+                return new User(username, password);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File not found: " + e.getMessage());
         }
+        return null;
     }
 
     public static void saveUserData(User user) {
-        try (PrintWriter pWriter = new PrintWriter(new FileWriter("data/UserData.txt",true))){
-
+        try (PrintWriter pWriter = new PrintWriter(new FileWriter("data/UserData/" + user.getUsername() + "_UserData.txt", true))) {
             if (user != null) {
-                pWriter.println(user.toString());
+                pWriter.println(user.getPassword());
             }
         } catch (IOException e) {
-            System.out.println("Something is wrong with the Datafile");
+            System.out.println("Something is wrong with the Datafile: " + e.getMessage());
         }
     }
+
+    public static void addToWatchlist(User user, String newWatchlistItem) {
+        try (PrintWriter pWriter = new PrintWriter(new FileWriter("data/UserData/" + user.getUsername() + "_UserData.txt", true))) {
+            if (user != null) {
+                pWriter.println("Watchlist:" + newWatchlistItem);
+            }
+        } catch (IOException e) {
+            System.out.println("Something is wrong with the Datafile: " + e.getMessage());
+        }
+    }
+
 }
