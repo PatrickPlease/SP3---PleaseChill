@@ -5,12 +5,12 @@ import java.util.List;
 
 public class StreamingService {
     CreateAccount newAccount;
-    Category newCategory;
+    Category newCategory = new Category();
     Watchlist list;
     private FileIO io = new FileIO();
     private TextUI ui = new TextUI();
-    private List<TvShow> tvShows;
-    private List<Movies> movies;
+    private List<TvShow> tvShows = new ArrayList<>();
+    private List<Movies> movies = new ArrayList<>();
     static ArrayList<User> users = new ArrayList<>();
 
 
@@ -38,7 +38,27 @@ public class StreamingService {
         int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
         switch (mainpage) {
             case 1:
-                searchByName();
+                ui.displayMessage("=============================================\n");
+                int searchOption = Integer.parseInt(ui.getInput(" 1. Search by name \n 2. Search by genre \n 3. Search by year \n 4. Return "));
+                switch (searchOption) {
+                    case 1:
+                        String nameSearch = ui.getInput("Enter the name to search: ");
+                        newCategory.searchByName(nameSearch, tvShows, movies);
+                        break;
+                    case 2:
+                        String genreSearch = ui.getInput("Enter the genre to search: ");
+                        newCategory.searchByGenre(genreSearch, tvShows, movies);
+                        break;
+                    case 3:
+                        String yearSearch = ui.getInput("Enter the year to search: ");
+                        newCategory.searchByYear(Integer.parseInt(yearSearch), tvShows, movies);
+                        break;
+                    case 4: //tilbage til valgmulighederne 1. search 2. movies osv..
+                        break;
+                    default:
+                        ui.displayMessage("Invalid choice. Please try again.");
+                        break;
+                }
                 break;
             case 2:
                 ui.displayMessage("============================================= \n");
@@ -125,22 +145,9 @@ public class StreamingService {
     }
 
 
-
-    public Media searchByName(){
-        return null;
-    }
-
-    public ArrayList<Media> searchByCategory(){
-        return null;
-    }
-
-    public ArrayList<Media> searchByYear() {
-        return null;
-    }
-
     public void loadMediaData() {
-      /*  tvShows = readTvShowsFromFile();
-        movies = readMoviesFromFile();*/
+        tvShows = MediaApplication.readTvShowsFromFile();
+        movies = MediaApplication.readMoviesFromFile();
     }
     public void logOut(){}
 

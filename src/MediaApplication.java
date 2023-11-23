@@ -10,7 +10,6 @@ public class MediaApplication {
     public static void tvShowPrinter() {
         List<TvShow> tvShows = readTvShowsFromFile();
 
-
         ui.displayMessage("TV Shows:");
         int tIndex = 1;
         for (TvShow tvShow : tvShows) {

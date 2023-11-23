@@ -1,5 +1,5 @@
 public abstract class Media {
-        private String title;
+        protected String title;
         private int releaseYear;
         private float rating;
         private String genre;
