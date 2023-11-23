@@ -62,7 +62,7 @@ public class StreamingService {
         return null;
     }
 
-    public void Mainpage() {
+    public void mainpage() {
         int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
         switch (mainpage) {
             case 1:
@@ -82,7 +82,7 @@ public class StreamingService {
                         newCategory.searchByYear(Integer.parseInt(yearSearch), tvShows, movies);
                         break;
                     case 4: //tilbage til valgmulighederne 1. search 2. movies osv..
-                        Mainpage();
+                        mainpage();
                         break;
                     default:
                         ui.displayMessage("Invalid choice. Please try again.");
@@ -91,10 +91,10 @@ public class StreamingService {
                 }
                 break;
             case 2:
-                Moviepage();
+                moviepage();
                 break;
             case 3:
-                Seriespage();
+                seriespage();
                 break;
             case 4:
                 ui.displayMessage("You are now leaving PleaseChill..");
@@ -145,7 +145,7 @@ public class StreamingService {
         }
     }
 
-    public void Seriespage() {
+    public void seriespage() {
         ui.displayMessage("============================================= \n");
         int seriespage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
         switch (seriespage) {
@@ -167,7 +167,7 @@ public class StreamingService {
                 break;
             case 6:
                 ui.displayMessage("============================================= \n");
-                Mainpage();
+                mainpage();
                 break;
             default:
                 ui.displayMessage("Invalid choice. Please try again.");
