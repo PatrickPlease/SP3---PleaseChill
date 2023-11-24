@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 public class StreamingService {
     CreateAccount newAccount;
-    Category newCategory;
+    Category newCategory= new Category();
     Watchlist list;
     private FileIO io = new FileIO();
     private TextUI ui = new TextUI();
@@ -14,7 +16,10 @@ public class StreamingService {
     static ArrayList<User> users = new ArrayList<>();
 
 
+
     public void setup() {
+        tvShows = MediaApplication.readTvShowsFromFile();
+        movies = MediaApplication.readMoviesFromFile();
         users = new ArrayList<>();
         ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
 
@@ -114,13 +119,6 @@ public class StreamingService {
         switch (moviepage) {
             case 1:
                 MediaApplication.moviesPrinter();
-                ui.displayMessage("============================================= \n" +
-                        "Choose a movie:");
-                int selectedMovieNumber = Integer.parseInt(ui.getInput("Enter the number of the movie you want to watch: "));
-                Movies selectedMovie = findMovieByNumber(selectedMovieNumber, movies);
-                if (selectedMovie != null) {
-                    ui.displayMessage("You have selected: " + selectedMovie.getTitle());
-                }
                 break;
             case 2:
                 ui.displayMessage("============================================= \n");
@@ -188,10 +186,7 @@ public class StreamingService {
         return null;
     }
 
-    public void loadMediaData() {
-        tvShows = MediaApplication.readTvShowsFromFile();
-        movies = MediaApplication.readMoviesFromFile();
-    }
+
 
     void runStreamingService() {
     }
@@ -201,23 +196,32 @@ public class StreamingService {
         FileIO.addToWatchlist(user, newWatchlistItem);
         ui.displayMessage("Movie are now added to your watchlist!");
     }
-    private void printMoviesWithNumbers(List<Movies> movies) {
-        int movieNumber = 1;
-        for (Movies movie : movies) {
-            ui.displayMessage(movieNumber + ". " + movie.getTitle() + " - y: " + movie.getReleaseYear());
-            movieNumber++;
-        }
-    }
 
-    private Movies findMovieByNumber(int selectedMovieNumber, List<Movies> movies) {
-        if (selectedMovieNumber > 0 && selectedMovieNumber <= movies.size()) {
-            return movies.get(selectedMovieNumber - 1);
-        } else {
-            return null;
-        }
+    public static class SearchInFile {
+        public static List<Integer> searchInFile(String filePath, String searchTerm) {
+            List<Integer> foundIndexes = new ArrayList<>();
 
+            try (BufferedReader reader = new BufferedReader(new FileReader("data/100bedstefilm.txt"))) {
+                String line;
+                int currentIndex = 0;
+
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains(searchTerm)) {
+                        foundIndexes.add(currentIndex);
+                    }
+
+                    currentIndex++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return foundIndexes;
+        }
     }
 }
+
+
 // TextUI skal laves om til metode (getInput og displaymessage)
 // Alt fra start() skal sættes in Streaming service
 // Struktur ud fra klasse diagram
