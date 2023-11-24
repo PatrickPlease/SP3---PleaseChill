@@ -183,13 +183,16 @@ public class StreamingService {
      String searchTerm = ui.getInput("Enter the media number you want to play: ");
 
      ui.displayMessage("Wanna play media?");
-     int wannaPlay = Integer.parseInt(ui.getInput(" 1. Yes \n 2. No \n"));
+     int wannaPlay = Integer.parseInt(ui.getInput(" 1. Yes \n 2. No \n 3. Add to watchlist\n" ));
      switch (wannaPlay) {
          case 1:
              newMediaWindow.play();
              break;
          case 2:
              mainpage();
+             break;
+         case 3:
+             addToWatchlist(User user);
              break;
          default:
              ui.displayMessage("Invalid choice. Please try again.");

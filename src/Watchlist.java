@@ -48,14 +48,6 @@ public class Watchlist {
         }
     }
 
-    public static void main(String[] args) {
-        Watchlist myWatchlist = new Watchlist();
-
-        addMoviesFromFile(myWatchlist);
-
-        myWatchlist.displayWatched();
-    }
-
     private static void addMoviesFromFile(Watchlist watchlist) {
         try (BufferedReader reader = new BufferedReader(new FileReader("data/100bedstefilm.txt"))) {
             String line;
