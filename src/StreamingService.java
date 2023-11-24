@@ -15,12 +15,16 @@ public class StreamingService {
     private List<TvShow> tvShows;
     private List<Movies> movies;
     static ArrayList<User> users = new ArrayList<>();
+    private static User loggedInUser;
+    private Watchlist watchlist;
 
+    private String searchTerm;
 
     public void setup() {
         tvShows = MediaApplication.readTvShowsFromFile();
         movies = MediaApplication.readMoviesFromFile();
         users = new ArrayList<>();
+        Watchlist watchlist = new Watchlist();
         ui.displayMessage("Welcome to PleaseChill, your favorite streaming platform");
 
         int choice = Integer.parseInt(ui.getInput("Press 1 to Login, Press 2 to Create an account"));
@@ -47,13 +51,13 @@ public class StreamingService {
         String username = ui.getInput("Enter your username: ");
         String password = ui.getInput("Enter your password: ");
 
-        User user = io.readUserData(username);
+        loggedInUser = io.readUserData(username);
 
-        if (user != null && user.getPassword().equals(password)) {
-            ui.displayMessage("Login successful. Welcome back, " + user.getUsername() + "!");
-
+        if (loggedInUser != null && loggedInUser.getPassword().equals(password)) {
+            ui.displayMessage("Login successful. Welcome back, " + loggedInUser.getUsername() + "!");
         } else {
             ui.displayMessage("Invalid username or password. Please try again.");
+            loggedInUser = null; // Set to null if login fails
             login();
         }
     }
@@ -70,6 +74,7 @@ public class StreamingService {
     public void mainpage() {
         tvShows = MediaApplication.readTvShowsFromFile();
         movies = MediaApplication.readMoviesFromFile();
+
         int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
         switch (mainpage) {
             case 1:
@@ -116,7 +121,10 @@ public class StreamingService {
         wannaPlay();
     }
 
-    public void moviepage() {
+    public void moviepage(){
+        tvShows = MediaApplication.readTvShowsFromFile();
+        movies = MediaApplication.readMoviesFromFile();
+
         ui.displayMessage("============================================= \n");
         int moviepage = Integer.parseInt(ui.getInput(" 1. Popular \n 2. Trending \n 3. Genres  \n 4. Recently watched \n 5. Watchlist \n 6. Return "));
         switch (moviepage) {
@@ -134,7 +142,7 @@ public class StreamingService {
                 break;
             case 5:
                 ui.displayMessage("============================================= \n");
-                //addToWatchlist();
+                watchlist.displayWatchlist(loggedInUser);
                 break;
             case 6:
                 ui.displayMessage("============================================= \n");
@@ -182,33 +190,48 @@ public class StreamingService {
 
      String searchTerm = ui.getInput("Enter the media number you want to play: ");
 
-     ui.displayMessage("Wanna play media?");
-     int wannaPlay = Integer.parseInt(ui.getInput(" 1. Yes \n 2. No \n 3. Add to watchlist\n" ));
-     switch (wannaPlay) {
-         case 1:
-             newMediaWindow.play();
-             break;
-         case 2:
-             mainpage();
-             break;
-         case 3:
-             addToWatchlist(User user);
-             break;
-         default:
-             ui.displayMessage("Invalid choice. Please try again.");
-             break;
-     }
- }
-
+        ui.displayMessage("Wanna play media?");
+        int wannaPlay = Integer.parseInt(ui.getInput(" 1. Yes \n 2. No \n 3. Add to watchlist\n" ));
+        switch (wannaPlay) {
+            case 1:
+                newMediaWindow.play();
+                break;
+            case 2:
+                mainpage();
+                break;
+            case 3:
+                addToWatchlist(loggedInUser);
+                break;
+            default:
+                ui.displayMessage("Invalid choice. Please try again.");
+                break;
+        }
+    }
 
 
     void runStreamingService() {
+
     }
 
     public void addToWatchlist(User user) {
-        String newWatchlistItem = ui.getInput("Enter the title of the movie to add to your watchlist:");
-        FileIO.addToWatchlist(user, newWatchlistItem);
-        ui.displayMessage("Movie are now added to your watchlist!");
+        List<Movies> movies = MediaApplication.readMoviesFromFile();
+        String selectedMediaTitle = searchTerm;
+        String watchlistItem = "Watchlist: " + selectedMediaTitle;;
+
+
+        List<String> userWatchlist = FileIO.readUserWatchlist(user.getUsername());
+
+
+        if (userWatchlist != null) {
+            userWatchlist.add(watchlistItem);
+
+
+            FileIO.saveUserWatchlist(user.getUsername(), userWatchlist);
+            ui.displayMessage("Media is now added to your watchlist!");
+            mainpage();
+        } else {
+            ui.displayMessage("Failed to add media to watchlist. Please try again.");
+        }
     }
 
     public static class SearchInFile {
@@ -232,6 +255,10 @@ public class StreamingService {
 
             return foundIndexes;
         }
+    }
+
+    public static User getLoggedInUser() {
+        return loggedInUser;
     }
 }
 
