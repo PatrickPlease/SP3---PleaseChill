@@ -7,14 +7,14 @@ import java.io.IOException;
 
 public class StreamingService {
     CreateAccount newAccount;
-    Category newCategory= new Category();
+    Category newCategory = new Category();
+    MediaWindow newMediaWindow = new MediaWindow();
     Watchlist list;
     private FileIO io = new FileIO();
     private TextUI ui = new TextUI();
     private List<TvShow> tvShows;
     private List<Movies> movies;
     static ArrayList<User> users = new ArrayList<>();
-
 
 
     public void setup() {
@@ -68,6 +68,8 @@ public class StreamingService {
     }
 
     public void mainpage() {
+        tvShows = MediaApplication.readTvShowsFromFile();
+        movies = MediaApplication.readMoviesFromFile();
         int mainpage = Integer.parseInt(ui.getInput(" 1. Search \n 2. Movies \n 3. Series \n 4. Log out"));
         switch (mainpage) {
             case 1:
@@ -111,6 +113,7 @@ public class StreamingService {
                 mainpage();
                 break;
         }
+        wannaPlay();
     }
 
     public void moviepage() {
@@ -174,17 +177,25 @@ public class StreamingService {
     }
 
 
-    public Media searchByName() {
-        return null;
-    }
+ public void wannaPlay(){
+     ui.displayMessage("============================================= \n");
 
-    public ArrayList<Media> searchByCategory() {
-        return null;
-    }
+     String searchTerm = ui.getInput("Enter the media number you want to play: ");
 
-    public ArrayList<Media> searchByYear() {
-        return null;
-    }
+     ui.displayMessage("Wanna play media?");
+     int wannaPlay = Integer.parseInt(ui.getInput(" 1. Yes \n 2. No \n"));
+     switch (wannaPlay) {
+         case 1:
+             newMediaWindow.play();
+             break;
+         case 2:
+             mainpage();
+             break;
+         default:
+             ui.displayMessage("Invalid choice. Please try again.");
+             break;
+     }
+ }
 
 
 

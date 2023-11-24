@@ -29,7 +29,7 @@ public class TextUI {
 
             switch (choice) {
                 case 1:
-                    mediaWindow.playMedia();
+                    //mediaWindow.playMedia();
                     break;
                 case 2:
                     mediaWindow.pauseMedia();
